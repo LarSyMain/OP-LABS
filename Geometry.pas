@@ -22,7 +22,7 @@ begin
   end
   else //если центры не равны то фигры либо касаются, либо пересекаются, либо не пересекаются
   begin
-    if (abs(xe)+abs(xc) = r + a) then 
+    if ((abs(xe)+abs(xc)) = r + a) then 
     begin
       write('Фигуры касаются');
     end    
