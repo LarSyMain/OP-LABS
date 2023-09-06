@@ -1,45 +1,41 @@
-program Geometry;
+program lab1;
+
 begin
- 
-  var xc, r, xe, a, b : real;
-  Readln(xc,r,xe,a, b);
-  //вводим xc, r, xe, a, b
+  var xc,r,xe,a : real;
+  readln(xc,r,xe,a);
   
-  if xc = xe then //если координаты центров равны, то фигуры концентричны 
+  if (xc = xe) then
   begin
     write('Фигуры концентричны');
     
-    if (r <= a) and (r <= b) then
+    if (r <= a) then
     begin
-      write(',круг вложен в элипс');
+      write(',полукруг вложен в квадрат');
+    end
+    
+    else if((r > a) and (abs(r - a) >= 2)) then
+    begin
+      write(',квадрат вложен в полукруг');
     end;
     
-    if (r >= a) and (r >= b) then
-    begin
-      write(',элипс вложен в круг');
-    end;
     
   end
-  else //если центры не равны то фигры либо касаются, либо пересекаются, либо не пересекаются
+  else
   begin
-    if ((abs(xe)+abs(xc)) = r + a) then 
+    
+    if(abs(xc-xe) = (r+a)) then
     begin
       write('Фигуры касаются');
-    end    
+    end
     
-    else if(r > abs(a - xe)) then //если радиус круга больше (a - xe), то фигуры пересекаются, если нет, то не пересекаются
+    else if(abs(xc-xe) < (r+a)) then
     begin
       write('Фигуры пересекаются');
     end
+  
     else
     begin
-      
       write('Фигуры не пересекаются');
-      
     end;
   end;
-  
- 
-    
-   
 end.
