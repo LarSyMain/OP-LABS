@@ -31,7 +31,7 @@ begin
   
   i := 1;
   
-  while flag = False or (i < n) do
+  while flag = True or (i < n) do
   begin
     if a[i] < B then
     begin
