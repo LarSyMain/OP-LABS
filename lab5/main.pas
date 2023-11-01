@@ -13,7 +13,8 @@ var
   flag, mflag : boolean;
   i, j : integer;
   f: TextFile;
-
+  di : integer;
+  
 begin
   
   flag := True;
@@ -22,10 +23,19 @@ begin
   Reset(f);
   readln(f, n);
   for i := 1 to n do
+    begin
       read(f, a[i]);
+     end;
   readln(f, d);
   CloseFile(f); 	     
   
+  for i := 1 to n do
+    begin
+      if a[i] = d then
+        begin
+        di := i;
+        end;
+     end;
   
   j := 1;
   i := 1;
@@ -44,10 +54,10 @@ begin
   if m = 0 then
     j := 0;
 
-  while (flag = True) and (i < n) do
+  while (flag = True) and (i <= n) do
   begin
     
-    if a[i] = d then
+    if i = di then
     begin
       flag := False;
     end
@@ -65,5 +75,6 @@ begin
   writeln(f, j, ' number');
   writeln(f, m, ' m');
   CloseFile(f);
+  
   
 end.
