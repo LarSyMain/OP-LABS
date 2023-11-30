@@ -63,8 +63,8 @@ procedure EvenElements(const x: matrix; var y: mas; const n, m, W, ne, me : inte
     begin
       for var j := me to m do 
       begin
-        if (i <> ki) then
-          begin
+          if(i < ki) then
+            begin
             g := g + 1;
             y[g] := x[j,i];
           end;
@@ -74,7 +74,7 @@ end;
 
 begin
   
-  AssignFile(fin, 'input2.txt');	       { Открываем файл }
+  AssignFile(fin, 'input.txt');	       { Открываем файл }
   Reset(fin);
   Get(arrA1, na, ma, Wa, fin);
   Get(arrB1, nb, mb, Wb, fin);
@@ -85,11 +85,11 @@ begin
   a := 0;
   EvenElements(arrA1, arrA2, na, ma, Wa, na div 2 + 1, 1, a);
   b := 0;
-  EvenElements(arrB1, arrB2, nb+2, (mb div 2) - 1, Wb, 1, 1, b); // n, m, W, ne, me
+  EvenElements(arrB1, arrB2, mb, nb div 2, Wb, 1, 1 , b); // n, m, W, ne, me
   c := 0;
   EvenElements(arrC1, arrC2, nc, mc, Wc, 1, mc div 2 + 1, c);
   
-  
+  write(nb, '' ,mb);
   
   
   AssignFile(fout, 'out.txt');	       
