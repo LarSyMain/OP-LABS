@@ -12,15 +12,18 @@ type
   
 var
   fin, fout: TextFile;
-  arr1 : matrix;
-  arr2 : mas;
-  n, m : integer;
-  W : integer;
+  arrA1, arrB1, arrC1 : matrix;
+  arrA2, arrB2, arrC2 : mas;
+  na, ma, la : integer;
+  nb, mb, lb : integer;
+  nc, mc, lc : integer;
+  Wa, Wb, Wc : integer;
+  a, b, c : integer;
 
 procedure Get(var x: matrix; var n, m, W: integer; var f: TextFile);
     begin
-      AssignFile(f, 'input.txt');	      
-      Reset(f);
+        
+      
       Readln(f,n);
       Readln(f,m);
       Readln(f,W);
@@ -29,60 +32,74 @@ procedure Get(var x: matrix; var n, m, W: integer; var f: TextFile);
         for var j := 1 to m do
           read(f, x[i,j]);
       end;
-      CloseFile(f); 	        
+              
     end;
 
-procedure Put(const x: mas;  var n : integer; var f: TextFile);
-  begin
-    AssignFile(f, 'out.txt');	      
-      Rewrite(f);
-      
-      for var i := 1 to nmax do
+procedure Put(const x: mas;  var g : integer; var f: TextFile);
+  begin    
+      for var i := 1 to g do
         write(f, x[i], ' ');
-      
-      CloseFile(f); 	      
+      writeln(); 
   end;
 
-procedure EvenElements(const x: matrix; var y: mas; var n,m, W: integer);
+procedure EvenElements(const x: matrix; var y: mas; const n, m, W, ne, me : integer; var g :integer);
   begin
     
-    var k, g : integer;
+    var ki, kj : integer;
     
-    for var i := 1 to n do
+    for var i := ne to n do
     begin
-      for var j := 1 to m do
+      for var j := me to m do
       begin
         if x[i,j] <> W then
-          k := i
+         begin 
+          ki := i;
+          kj := j;
+         end;
       end;
     end;
     g := 0;
-    for var i := n to k-1 do
+    for var i := ne to n do
     begin
-      for var j := 1 to m do 
+      for var j := me to m do 
       begin
-        g := g + 1;
-        y[g] := x[j,i];
+        if (i <> ki) then
+          begin
+            g := g + 1;
+            y[g] := x[j,i];
+          end;
       end;
     end;
 end;
 
 begin
   
-  AssignFile(fin, 'input.txt');	       { Открываем файл }
+  AssignFile(fin, 'input2.txt');	       { Открываем файл }
   Reset(fin);
-  Get(arr1, n, m, W, fin);
-  //CloseFile(fin);
+  Get(arrA1, na, ma, Wa, fin);
+  Get(arrB1, nb, mb, Wb, fin);
+  Get(arrC1, nc, mc, Wc, fin);
+  CloseFile(fin);
   
   // for A
-  n := n div 2;
-  n := n + 1;
-  EvenElements(arr1, arr2, n, m, W);
+  a := 0;
+  EvenElements(arrA1, arrA2, na, ma, Wa, na div 2 + 1, 1, a);
+  b := 0;
+  EvenElements(arrB1, arrB2, nb+2, (mb div 2) - 1, Wb, 1, 1, b); // n, m, W, ne, me
+  c := 0;
+  EvenElements(arrC1, arrC2, nc, mc, Wc, 1, mc div 2 + 1, c);
   
-  AssignFile(fout, 'out.txt');	       { Открываем файл }
+  
+  
+  
+  AssignFile(fout, 'out.txt');	       
   Rewrite(fout);
-  Put(arr2, n ,fout);
-  //CloseFile(fout);
+  Put(arrA2, a ,fout);
+  writeln(fout,'');
+  Put(arrB2, b ,fout);
+  writeln(fout,'');
+  Put(arrC2, c ,fout);
+  CloseFile(fout);
   
   
   
